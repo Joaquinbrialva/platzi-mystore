@@ -32,6 +32,7 @@ class ProductsService {
 
   findOne(id) {
     // lógica para buscar un producto específico
+    const name = this.getTotal();
     return this.products.find(item => item.id === id);
   }
 
