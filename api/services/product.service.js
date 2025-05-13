@@ -1,5 +1,6 @@
 const { faker } = require('@faker-js/faker');
 const boom = require('@hapi/boom');
+const { models } = require('../libs/sequelize');
 
 class ProductsService {
 
@@ -30,20 +31,17 @@ class ProductsService {
     return newProduct;
   }
 
-  find() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.products);
-      }, 5000);
-    })
-  }
+  async find() {
+    const res = await models.Product.findAll();
+    return res;
+  };
 
   async findOne(id) {
     const product = this.products.find(item => item.id === id);
     if (!product) {
       throw boom.notFound('producto no encontrado');
     };
-    if(product.isBlock) {
+    if (product.isBlock) {
       throw boom.unauthorized('product is block');
     }
     return product;

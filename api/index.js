@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const app = express();
 const port = process.env.PORT || 3000;
 const routerApi = require('./routes/index.routes');
-const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
+const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/error.handler');
 app.use(express.json());
 app.use(morgan('dev'));
 
@@ -29,6 +29,7 @@ app.get('/api', (req, res) => {
 
 
 app.use(logErrors);
+app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 app.listen(port, () => {
