@@ -6,7 +6,7 @@ module.exports = {
     await queryInterface.createTable(USER_TABLE, userSchema);
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable(USER_TABLE);
   }
 };

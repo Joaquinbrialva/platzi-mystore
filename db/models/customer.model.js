@@ -4,7 +4,7 @@ const { USER_TABLE } = require('./user.model')
 
 const CUSTOMER_TABLE = 'customers';
 
-const CustomerSchema =  {
+const CustomerSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -47,7 +47,7 @@ const CustomerSchema =  {
 class Customer extends Model {
 
   static associate(models) {
-    this.belongsTo(models.User, {as: 'user'});
+    this.belongsTo(models.User, { as: 'user' });
   }
 
   static config(sequelize) {
