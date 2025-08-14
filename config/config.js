@@ -9,7 +9,7 @@ const config = {
 	dbName: process.env.DB_NAME,
 	dbPort: process.env.DB_PORT,
 	dbUrl: process.env.DATABASE_URL,
-	isProd: process.env.NODE_ENV,
+	isProd: process.env.NODE_ENV === 'production',
 };
 
 module.exports = { config };

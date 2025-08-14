@@ -1,20 +1,20 @@
 const { Sequelize } = require('sequelize');
-
 const { config } = require('../config/config');
 const setupModels = require('../db/models');
 
 let sequelize;
 
-if (config.dbUrl && config.env === 'production') {
-	// Railway / producción usa DATABASE_URL
+if (config.isProd && config.dbUrl) {
 	sequelize = new Sequelize(config.dbUrl, {
 		dialect: 'postgres',
+		dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
 	});
 } else {
-	const USER = encodeURIComponent(config.dbUser);
-	const PASSWORD = encodeURIComponent(config.dbPassword);
-	const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
-	sequelize = new Sequelize(URI, { dialect: 'postgres' });
+	sequelize = new Sequelize(config.dbName, config.dbUser, config.dbPassword, {
+		host: config.dbHost,
+		port: config.dbPort,
+		dialect: 'postgres',
+	});
 }
 
 setupModels(sequelize);
