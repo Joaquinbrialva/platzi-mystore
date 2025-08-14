@@ -16,7 +16,7 @@ MyStore API es una aplicación backend robusta que proporciona endpoints para ge
 - **Logging** con Morgan
 - **Migraciones** de base de datos con Sequelize CLI
 - **Docker** para desarrollo local
-- **Despliegue** preparado para Vercel
+- **Despliegue** en Railway con base de datos PostgreSQL incluida
 
 ## 🚀 Tecnologías Utilizadas
 
@@ -53,8 +53,8 @@ platzi-mystore/
 ### Prerrequisitos
 
 - Node.js 22.x o superior
-- PostgreSQL 13 o superior
-- Docker y Docker Compose (opcional)
+- PostgreSQL 13 o superior (para desarrollo local)
+- Docker y Docker Compose (opcional, para desarrollo local)
 
 ### Pasos de Instalación
 
@@ -71,7 +71,7 @@ platzi-mystore/
    npm install
    ```
 
-3. **Configurar variables de entorno**
+3. **Configurar variables de entorno para desarrollo local**
 
    ```bash
    cp .env.example .env
@@ -89,7 +89,7 @@ platzi-mystore/
    DB_PORT=5432
    ```
 
-4. **Configurar base de datos con Docker (recomendado)**
+4. **Configurar base de datos con Docker (recomendado para desarrollo)**
 
    ```bash
    docker-compose up -d postgres
@@ -111,9 +111,20 @@ platzi-mystore/
    npm start
    ```
 
+### 🚀 Despliegue Rápido en Railway
+
+Para desplegar en producción sin configurar base de datos local:
+
+1. **Fork o clona este repositorio**
+2. **Ve a [Railway](https://railway.app)**
+3. **Conecta tu GitHub y selecciona el repositorio**
+4. **Railway detectará automáticamente** la configuración
+5. **Agrega un servicio PostgreSQL** desde Railway
+6. **¡Listo!** Tu API estará desplegada con base de datos incluida
+
 ## 🐳 Docker
 
-El proyecto incluye configuración completa de Docker para desarrollo:
+El proyecto incluye configuración completa de Docker para **desarrollo local**:
 
 ```bash
 # Iniciar todos los servicios
@@ -133,12 +144,22 @@ docker-compose down
 - **MySQL**: Puerto 3306 (opcional)
 - **phpMyAdmin**: Puerto 8080 (opcional)
 
+> ⚠️ **Nota**: Las credenciales de Docker en `docker-compose.yml` son solo para desarrollo local. En producción, Railway proporciona una base de datos PostgreSQL segura y configurada automáticamente.
+
 ## 📚 Endpoints de la API
 
 ### Base URL
 
+**Desarrollo local:**
+
 ```
 http://localhost:3000/api/v1
+```
+
+**Producción (Railway):**
+
+```
+https://tu-app.up.railway.app/api/v1
 ```
 
 ### Productos
@@ -240,23 +261,41 @@ npm run lint             # Ejecutar ESLint
 - **Validación**: Todos los endpoints validan datos de entrada con Joi
 - **Manejo de Errores**: Errores HTTP apropiados con mensajes descriptivos
 - **Logging**: Registro de todas las peticiones HTTP
+- **Base de Datos**: Conexión SSL en producción (Railway)
+- **Variables de Entorno**: Configuración segura para desarrollo y producción
 
 ## 🚀 Despliegue
 
-### Vercel
+### Railway
 
-El proyecto está configurado para despliegue en Vercel con el archivo `vercel.json`.
+El proyecto está optimizado para despliegue en Railway, que proporciona una base de datos PostgreSQL incluida y despliegue automático desde GitHub.
+
+#### Pasos para desplegar en Railway:
+
+1. **Crear cuenta en [Railway](https://railway.app)**
+2. **Conectar tu repositorio de GitHub**
+3. **Seleccionar el repositorio** `platzi-mystore`
+4. **Railway detectará automáticamente** que es una aplicación Node.js
+5. **Agregar servicio PostgreSQL** desde Railway
+6. **Configurar variables de entorno**:
+   - `DATABASE_URL`: URL de conexión de PostgreSQL (se configura automáticamente)
+   - `NODE_ENV=production`
+   - `PORT`: Puerto asignado por Railway
+
+#### Ejecutar migraciones en Railway:
+
+Una vez desplegado, ejecuta las migraciones desde el terminal de Railway:
+
+```bash
+npx sequelize-cli db:migrate
+```
 
 ### Variables de Entorno de Producción
 
 ```env
 NODE_ENV=production
 PORT=3000
-DB_USER=tu_usuario_produccion
-DB_PASSWORD=tu_password_produccion
-DB_HOST=tu_host_produccion
-DB_NAME=tu_db_produccion
-DB_PORT=5432
+DATABASE_URL=postgresql://user:password@host:port/database
 ```
 
 ## 🤝 Contribución
@@ -281,6 +320,7 @@ Desarrollado como parte del curso de Backend con Node.js de Platzi.
 - **Express.js** por el framework web
 - **Sequelize** por el ORM robusto
 - **PostgreSQL** por la base de datos confiable
+- **Railway** por la plataforma de despliegue simple y efectiva
 
 ---
 
