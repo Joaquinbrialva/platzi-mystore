@@ -82,8 +82,8 @@ platzi-mystore/
    ```env
    NODE_ENV=development
    PORT=3000
-   DB_USER=joaco
-   DB_PASSWORD=admin123
+   DB_USER=tu_usuario_db
+   DB_PASSWORD=tu_password_db
    DB_HOST=localhost
    DB_NAME=my_store
    DB_PORT=5432
