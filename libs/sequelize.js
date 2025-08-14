@@ -5,18 +5,10 @@ const setupModels = require('../db/models');
 
 let sequelize;
 
-if (config.dbUrl) {
+if (config.dbUrl && config.env === 'production') {
 	// Railway / producción usa DATABASE_URL
 	sequelize = new Sequelize(config.dbUrl, {
 		dialect: 'postgres',
-		dialectOptions: config.isProd
-			? {
-					ssl: {
-						require: true,
-						rejectUnauthorized: false,
-					},
-				}
-			: {},
 	});
 } else {
 	const USER = encodeURIComponent(config.dbUser);
