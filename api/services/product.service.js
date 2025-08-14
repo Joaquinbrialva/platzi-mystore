@@ -28,6 +28,14 @@ class ProductsService {
 				[Op.gte]: price_min,
 				[Op.lte]: price_max,
 			};
+		} else if (price_min) {
+			options.where.price = {
+				[Op.gte]: price_min,
+			};
+		} else if (price_max) {
+			options.where.price = {
+				[Op.lte]: price_max,
+			};
 		}
 		const products = await models.Product.findAll(options);
 		return products;
