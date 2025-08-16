@@ -4,7 +4,7 @@ Una API REST completa para una tienda en línea desarrollada con Node.js, Expres
 
 ## 📋 Descripción
 
-MyStore API es una aplicación backend robusta que proporciona endpoints para gestionar productos, categorías, usuarios, clientes y pedidos. La API está construida siguiendo las mejores prácticas de desarrollo, incluyendo validación de datos, manejo de errores, y una arquitectura modular y escalable.
+MyStore API es una aplicación backend de ejemplo que proporciona endpoints para gestionar productos, categorías, usuarios, clientes y pedidos. La API está construida siguiendo las mejores prácticas de desarrollo, incluyendo validación de datos, manejo de errores, y una arquitectura modular y escalable.
 
 ## ✨ Características
 
@@ -111,17 +111,6 @@ platzi-mystore/
    npm start
    ```
 
-### 🚀 Despliegue Rápido en Railway
-
-Para desplegar en producción sin configurar base de datos local:
-
-1. **Fork o clona este repositorio**
-2. **Ve a [Railway](https://railway.app)**
-3. **Conecta tu GitHub y selecciona el repositorio**
-4. **Railway detectará automáticamente** la configuración
-5. **Agrega un servicio PostgreSQL** desde Railway
-6. **¡Listo!** Tu API estará desplegada con base de datos incluida
-
 ## 🐳 Docker
 
 El proyecto incluye configuración completa de Docker para **desarrollo local**:
@@ -141,8 +130,6 @@ docker-compose down
 
 - **PostgreSQL**: Puerto 5432
 - **PgAdmin**: Puerto 5050 (admin@mail.com / root)
-- **MySQL**: Puerto 3306 (opcional)
-- **phpMyAdmin**: Puerto 8080 (opcional)
 
 > ⚠️ **Nota**: Las credenciales de Docker en `docker-compose.yml` son solo para desarrollo local. En producción, Railway proporciona una base de datos PostgreSQL segura y configurada automáticamente.
 
@@ -159,7 +146,7 @@ http://localhost:3000/api/v1
 **Producción (Railway):**
 
 ```
-https://tu-app.up.railway.app/api/v1
+https://platzi-mystore.up.railway.app/api/v1
 ```
 
 ### Productos
@@ -269,26 +256,6 @@ npm run lint             # Ejecutar ESLint
 ### Railway
 
 El proyecto está optimizado para despliegue en Railway, que proporciona una base de datos PostgreSQL incluida y despliegue automático desde GitHub.
-
-#### Pasos para desplegar en Railway:
-
-1. **Crear cuenta en [Railway](https://railway.app)**
-2. **Conectar tu repositorio de GitHub**
-3. **Seleccionar el repositorio** `platzi-mystore`
-4. **Railway detectará automáticamente** que es una aplicación Node.js
-5. **Agregar servicio PostgreSQL** desde Railway
-6. **Configurar variables de entorno**:
-   - `DATABASE_URL`: URL de conexión de PostgreSQL (se configura automáticamente)
-   - `NODE_ENV=production`
-   - `PORT`: Puerto asignado por Railway
-
-#### Ejecutar migraciones en Railway:
-
-Una vez desplegado, ejecuta las migraciones desde el terminal de Railway:
-
-```bash
-npx sequelize-cli db:migrate
-```
 
 ### Variables de Entorno de Producción
 
